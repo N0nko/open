@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_0deb4275ad61fea670480d10eb0ac980 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+    <div style='position: fixed;
+                top: 60px;
+                right: 20px;
+                width: 270px;
+                height: 460px;
+                overflow-y: auto;
+                background-color: white;
+                border: 2px solid gray;
+                z-index: 9999;
+                padding: 10px;
+                font-family: Arial, sans-serif;
+                font-size: 13px;'>
+      <h4 style="margin-top: 0;">Packing Checklist</h4>
+      <ul>
+        <li><b>Winter Coat</b> (insulated, waterproof)</li>
+        <li><b>Thermal Layers</b> (tops &amp; leggings)</li>
+        <li><b>Mid-Layers</b> (sweaters/fleece)</li>
+        <li><b>Insulated Boots</b> w/ good traction</li>
+        <li><b>Warm Hat, Scarf, Gloves</b></li>
+        <li><b>Wool Socks</b> (multiple pairs)</li>
+        <li><b>Umbrella / Hood</b> (snow or rain)</li>
+        <li><b>Sunglasses</b> (low winter sun glare)</li>
+        <li><b>Lip Balm</b> &amp; Moisturizer (dry air)</li>
+        <li><b>Passport/ID, Cards, Some Cash</b></li>
+        <li><b>Power Adapter</b> (Type C/F)</li>
+        <li><b>Phone &amp; Charger</b></li>
+        <li><b>Any Medications</b> + Basic First Aid</li>
+        <li>Hand/Foot Warmers (optional)</li>
+      </ul>
+      <hr>
+      <h4>Tickets / Reservations</h4>
+      <ul>
+        <li><b>Arlanda Express / Flygbussarna</b></li>
+        <li><b>Vasa Museum</b></li>
+        <li><b>Skansen</b></li>
+        <li><b>Royal Palace Tour</b></li>
+        <li><b>ICEBAR (Optional)</b></li>
+        <li><b>SL Transit Pass</b> (metro/tram/bus/ferry)</li>
+        <li>Dinner Reservations (Fri/Sat)</li>
+      </ul>
+      <hr>
+      <h4>Restaurant Menus</h4>
+      <ul>
+        <li>
+          <b>Sturehof</b> (Seafood &amp; Swedish Classics): 
+          <a href="https://sturehof.com/meny/" target="_blank">Menu Link</a>
+        </li>
+        <li>
+          <b>Restaurang AG</b> (Steakhouse): 
+          <a href="https://restaurangag.se/en/menu" target="_blank">Menu Link</a>
+        </li>
+        <li>
+          <b>Meno Male</b> (Neapolitan Pizza): 
+          <a href="https://www.menomale.se/meny/" target="_blank">Menu Link</a>
+        </li>
+        <li>
+          <b>Griffins’ Steakhouse</b>: 
+          No official link. See 
+          <a href="https://goo.gl/maps/8MFbWNaRuN4tjfiA8" target="_blank">Google Maps</a> 
+          or TripAdvisor reviews.
+        </li>
+        <li>
+          <b>Nystekt Strömming</b> (Street Food Herring):
+          No dedicated site. Check 
+          <a href="https://www.visitstockholm.com/" target="_blank">Visit Stockholm</a>
+          for details.
+        </li>
+      </ul>
+    </div>
+    
+    
+            <div class="folium-map" id="map_0deb4275ad61fea670480d10eb0ac980" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_0deb4275ad61fea670480d10eb0ac980 = L.map(
+                "map_0deb4275ad61fea670480d10eb0ac980",
+                {
+                    center: [59.3293, 18.0686],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_90d0fcfcc42cc72d70143c40d24782ad = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_90d0fcfcc42cc72d70143c40d24782ad.addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var marker_ffec0c07cb83868c9d9079c90e1aa7f0 = L.marker(
+                [59.6467921, 17.937044334194475],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_596e9cef4269d500821648b648758a31 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid red;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eFriday, Feb 14\u003c/b\u003e\u003cbr\u003e\n                      18:30\u003cbr\u003e\n                      Arrive Arlanda Airport\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_ffec0c07cb83868c9d9079c90e1aa7f0.setIcon(div_icon_596e9cef4269d500821648b648758a31);
+        
+    
+            var marker_66e783f71e41e67bb9d5e948adc30c80 = L.marker(
+                [59.6467921, 17.937044334194475],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_833759c98f23db283e294448129c373b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_66e783f71e41e67bb9d5e948adc30c80.setIcon(icon_833759c98f23db283e294448129c373b);
+        
+    
+            marker_66e783f71e41e67bb9d5e948adc30c80.bindTooltip(
+                `<div>
+                     18:30 - Arrive Arlanda Airport<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: 
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e32d10b5f9a2f9c004adef15e4cd684c = L.marker(
+                [59.3332945, 18.0550736],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_1eba4f2acda4ea79904f428deb2c6042 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid red;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eFriday, Feb 14\u003c/b\u003e\u003cbr\u003e\n                      19:00\u003cbr\u003e\n                      FlixBus to Cityterminalen\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_e32d10b5f9a2f9c004adef15e4cd684c.setIcon(div_icon_1eba4f2acda4ea79904f428deb2c6042);
+        
+    
+            var marker_73b25a3aebfccf7f0f60125f75493212 = L.marker(
+                [59.3332945, 18.0550736],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_8d9a07dec1ba4c1542d50ee02fc068f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_73b25a3aebfccf7f0f60125f75493212.setIcon(icon_8d9a07dec1ba4c1542d50ee02fc068f9);
+        
+    
+            marker_73b25a3aebfccf7f0f60125f75493212.bindTooltip(
+                `<div>
+                     19:00 - FlixBus to Cityterminalen<br>Cost: 119 SEK (~ 10.82 EUR)<br>Transport: Short walk from T-Centralen or city buses
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_a09c1b81e4a7a6f96adc57842567d7d0 = L.marker(
+                [59.331327, 18.0453713],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_1abc70b2a92ca6f45178c8c9fb2a8c4d = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid red;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eFriday, Feb 14\u003c/b\u003e\u003cbr\u003e\n                      20:00\u003cbr\u003e\n                      Check-in at Clarion Amaranten\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_a09c1b81e4a7a6f96adc57842567d7d0.setIcon(div_icon_1abc70b2a92ca6f45178c8c9fb2a8c4d);
+        
+    
+            var marker_fa2dd6fe070bb92e7a7242d2e3e3a4d1 = L.marker(
+                [59.331327, 18.0453713],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_ab1c536a180f10f9f8aec4106d6fa762 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_fa2dd6fe070bb92e7a7242d2e3e3a4d1.setIcon(icon_ab1c536a180f10f9f8aec4106d6fa762);
+        
+    
+            marker_fa2dd6fe070bb92e7a7242d2e3e3a4d1.bindTooltip(
+                `<div>
+                     20:00 - Check-in at Clarion Amaranten<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: Walk or T-Bana (Blue line) to Rådhuset station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_8540c717a1435ad52ccb8283352ebd6f = L.marker(
+                [59.3301205, 18.0547453],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_0b58e371b2cb055096428de4307059cd = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid red;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eFriday, Feb 14\u003c/b\u003e\u003cbr\u003e\n                      20:30\u003cbr\u003e\n                      Dinner at Griffins\u2019 Steakhouse\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_8540c717a1435ad52ccb8283352ebd6f.setIcon(div_icon_0b58e371b2cb055096428de4307059cd);
+        
+    
+            var marker_4c421ff7d45209e137b3af1e75a39624 = L.marker(
+                [59.3301205, 18.0547453],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_98258a29045751534c9712b9e703555b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4c421ff7d45209e137b3af1e75a39624.setIcon(icon_98258a29045751534c9712b9e703555b);
+        
+    
+            marker_4c421ff7d45209e137b3af1e75a39624.bindTooltip(
+                `<div>
+                     20:30 - Dinner at Griffins’ Steakhouse<br>Cost: 300 SEK (~ 27.27 EUR)<br>Transport: Check SL app or Google Maps for route
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_32b14a2780111ac978b31070c7482732 = L.marker(
+                [59.3278016, 18.055091],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_81bc6bfe32eccaa54d82ee3a818b6c4d = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid red;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eFriday, Feb 14\u003c/b\u003e\u003cbr\u003e\n                      22:00\u003cbr\u003e\n                      Stroll by City Hall (night view)\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_32b14a2780111ac978b31070c7482732.setIcon(div_icon_81bc6bfe32eccaa54d82ee3a818b6c4d);
+        
+    
+            var marker_faa3b0baae76689b24ccfd0e2cf6a2c7 = L.marker(
+                [59.3278016, 18.055091],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_b06308b99702531406a4139c3228d902 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_faa3b0baae76689b24ccfd0e2cf6a2c7.setIcon(icon_b06308b99702531406a4139c3228d902);
+        
+    
+            marker_faa3b0baae76689b24ccfd0e2cf6a2c7.bindTooltip(
+                `<div>
+                     22:00 - Stroll by City Hall (night view)<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: Walk from T-Centralen (~10 min) or Bus #3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3e8963d827939e1d059ff08bef2cbe39 = L.polyline(
+                [[59.6467921, 17.937044334194475], [59.3332945, 18.0550736], [59.331327, 18.0453713], [59.3301205, 18.0547453], [59.3278016, 18.055091]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "red", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            poly_line_3e8963d827939e1d059ff08bef2cbe39.bindTooltip(
+                `<div>
+                     Friday, Feb 14
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9b10fc90829f756d6e41b14d95b21422 = L.marker(
+                [59.3285405, 18.0916981],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_fcff808bb13a3010f4171ef357ee5cab = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid green;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSaturday, Feb 15\u003c/b\u003e\u003cbr\u003e\n                      09:00\u003cbr\u003e\n                      Metro to Djurg\u00e5rden\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_9b10fc90829f756d6e41b14d95b21422.setIcon(div_icon_fcff808bb13a3010f4171ef357ee5cab);
+        
+    
+            var marker_64d605431745f49923dece9ba30adce3 = L.marker(
+                [59.3285405, 18.0916981],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_1876cd2da9fa0216ea58896c9f1dfb33 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_64d605431745f49923dece9ba30adce3.setIcon(icon_1876cd2da9fa0216ea58896c9f1dfb33);
+        
+    
+            marker_64d605431745f49923dece9ba30adce3.bindTooltip(
+                `<div>
+                     09:00 - Metro to Djurgården<br>Cost: 45 SEK (~ 4.09 EUR)<br>Transport: 
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_49e3d07262f835139e78f8bf87a90d7d = L.marker(
+                [59.3286205, 18.0917781],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_bda09e2dcb631586de240fd77014f195 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid green;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSaturday, Feb 15\u003c/b\u003e\u003cbr\u003e\n                      10:00\u003cbr\u003e\n                      Visit Vasa Museum\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_49e3d07262f835139e78f8bf87a90d7d.setIcon(div_icon_bda09e2dcb631586de240fd77014f195);
+        
+    
+            var marker_f275df2e0868b79e1f9926ed813d4cb8 = L.marker(
+                [59.3286205, 18.0917781],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_9a831359433203c174cb81ac4038371e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_f275df2e0868b79e1f9926ed813d4cb8.setIcon(icon_9a831359433203c174cb81ac4038371e);
+        
+    
+            marker_f275df2e0868b79e1f9926ed813d4cb8.bindTooltip(
+                `<div>
+                     10:00 - Visit Vasa Museum<br>Cost: 170 SEK (~ 15.45 EUR)<br>Transport: Tram #7 or Bus #69 from city center
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d92db307550e8513773e6c9838ab1cfe = L.marker(
+                [59.326622799999996, 18.105282339141286],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_1bdddccb2931bdd46aabebe041884ec9 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid green;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSaturday, Feb 15\u003c/b\u003e\u003cbr\u003e\n                      13:30\u003cbr\u003e\n                      Explore Skansen\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_d92db307550e8513773e6c9838ab1cfe.setIcon(div_icon_1bdddccb2931bdd46aabebe041884ec9);
+        
+    
+            var marker_17582b8f2a799bdb5983011074632b98 = L.marker(
+                [59.326622799999996, 18.105282339141286],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_ca903912976baaf526513b735af40af0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_17582b8f2a799bdb5983011074632b98.setIcon(icon_ca903912976baaf526513b735af40af0);
+        
+    
+            marker_17582b8f2a799bdb5983011074632b98.bindTooltip(
+                `<div>
+                     13:30 - Explore Skansen<br>Cost: 220 SEK (~ 20.00 EUR)<br>Transport: Tram #7 or Bus #69 from city center
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7f217d323415047186f0e54de3948684 = L.marker(
+                [59.3233049, 18.0670022],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_004b87496b5e0034cbf14053bc79c9f7 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid green;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSaturday, Feb 15\u003c/b\u003e\u003cbr\u003e\n                      16:00\u003cbr\u003e\n                      Walk in Gamla Stan\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_7f217d323415047186f0e54de3948684.setIcon(div_icon_004b87496b5e0034cbf14053bc79c9f7);
+        
+    
+            var marker_616095cfb5b0e440f35a84c210831ace = L.marker(
+                [59.3233049, 18.0670022],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_43eb6a04ad3b68dd6b0b0c3d0cfae31f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_616095cfb5b0e440f35a84c210831ace.setIcon(icon_43eb6a04ad3b68dd6b0b0c3d0cfae31f);
+        
+    
+            marker_616095cfb5b0e440f35a84c210831ace.bindTooltip(
+                `<div>
+                     16:00 - Walk in Gamla Stan<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: T-Bana (Green/Red line) from T-Centralen or short walk
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d342a8d6141e060d14018daa95816431 = L.marker(
+                [59.3357202, 18.0732836],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_e557999fe158256ab0480cec751fd533 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid green;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSaturday, Feb 15\u003c/b\u003e\u003cbr\u003e\n                      19:30\u003cbr\u003e\n                      Dinner at Sturehof\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_d342a8d6141e060d14018daa95816431.setIcon(div_icon_e557999fe158256ab0480cec751fd533);
+        
+    
+            var marker_7dfca5a4e7be591814ca64bc0f541d07 = L.marker(
+                [59.3357202, 18.0732836],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_465d27713cd4b590b1d4bb900bbd6a82 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7dfca5a4e7be591814ca64bc0f541d07.setIcon(icon_465d27713cd4b590b1d4bb900bbd6a82);
+        
+    
+            marker_7dfca5a4e7be591814ca64bc0f541d07.bindTooltip(
+                `<div>
+                     19:30 - Dinner at Sturehof<br>Cost: 350 SEK (~ 31.82 EUR)<br>Transport: T-Bana (Red line) to Östermalmstorg or short walk
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_7034885a3d42be0c29ebafc3db17f025 = L.marker(
+                [59.3321865, 18.0567298],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_47f49215582f211ec8ae1ca5b70e1fdc = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid green;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSaturday, Feb 15\u003c/b\u003e\u003cbr\u003e\n                      21:30\u003cbr\u003e\n                      ICEBAR Stockholm (Optional)\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_7034885a3d42be0c29ebafc3db17f025.setIcon(div_icon_47f49215582f211ec8ae1ca5b70e1fdc);
+        
+    
+            var marker_a6d61115d11134aa462054daf82d5f27 = L.marker(
+                [59.3321865, 18.0567298],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_a6c0de62d9092cd1a5828ae5983e15d9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_a6d61115d11134aa462054daf82d5f27.setIcon(icon_a6c0de62d9092cd1a5828ae5983e15d9);
+        
+    
+            marker_a6d61115d11134aa462054daf82d5f27.bindTooltip(
+                `<div>
+                     21:30 - ICEBAR Stockholm (Optional)<br>Cost: 219 SEK (~ 19.91 EUR)<br>Transport: Walk from T-Centralen (5 min) or any bus to Central Station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_96c048f704c76e6ea963f664ec32d57d = L.polyline(
+                [[59.3285405, 18.0916981], [59.3286205, 18.0917781], [59.326622799999996, 18.105282339141286], [59.3233049, 18.0670022], [59.3357202, 18.0732836]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            poly_line_96c048f704c76e6ea963f664ec32d57d.bindTooltip(
+                `<div>
+                     Saturday, Feb 15
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_e65ba3563c36d2da235c81b6a4644780 = L.polyline(
+                [[59.3357202, 18.0732836], [59.3321865, 18.0567298]],
+                {"bubblingMouseEvents": true, "color": "green", "dashArray": "5,5", "dashOffset": null, "fill": false, "fillColor": "green", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.6, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            poly_line_e65ba3563c36d2da235c81b6a4644780.bindTooltip(
+                `<div>
+                     Saturday, Feb 15 (optional)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9c66f7735c46bf2f4eb710d578e8be5b = L.marker(
+                [59.3207312389999, 18.06045556823467],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_773d9fdbf139ffb8c359ebba39762249 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid blue;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSunday, Feb 16\u003c/b\u003e\u003cbr\u003e\n                      10:00\u003cbr\u003e\n                      Monteliusv\u00e4gen viewpoint\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_9c66f7735c46bf2f4eb710d578e8be5b.setIcon(div_icon_773d9fdbf139ffb8c359ebba39762249);
+        
+    
+            var marker_b9130251c21b7a28833b8630edf47757 = L.marker(
+                [59.3207312389999, 18.06045556823467],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_bec1f8a278d20cae62787d160c5156ef = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_b9130251c21b7a28833b8630edf47757.setIcon(icon_bec1f8a278d20cae62787d160c5156ef);
+        
+    
+            marker_b9130251c21b7a28833b8630edf47757.bindTooltip(
+                `<div>
+                     10:00 - Monteliusvägen viewpoint<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: 
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_52301b6aec651c66d24600a704abd7d5 = L.marker(
+                [59.34019565307254, 18.055154799972097],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_04a068b635ed659bd8f6e02aac921107 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid blue;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSunday, Feb 16\u003c/b\u003e\u003cbr\u003e\n                      11:30\u003cbr\u003e\n                      Shopping on Drottninggatan\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_52301b6aec651c66d24600a704abd7d5.setIcon(div_icon_04a068b635ed659bd8f6e02aac921107);
+        
+    
+            var marker_241d7973b242d9f93f87647bfadcf470 = L.marker(
+                [59.34019565307254, 18.055154799972097],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_b544e12e16acfeef86edbbe593f7bdd7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_241d7973b242d9f93f87647bfadcf470.setIcon(icon_b544e12e16acfeef86edbbe593f7bdd7);
+        
+    
+            marker_241d7973b242d9f93f87647bfadcf470.bindTooltip(
+                `<div>
+                     11:30 - Shopping on Drottninggatan<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: T-Bana (Green line) to Hötorget or walk from Sergels Torg
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e21c787e8cd48c7750f98346c0784e8b = L.marker(
+                [59.3287901, 18.045308],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_961d900556f7dc21d42df4ec0b030682 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid blue;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSunday, Feb 16\u003c/b\u003e\u003cbr\u003e\n                      13:00\u003cbr\u003e\n                      Lunch at Meno Male\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_e21c787e8cd48c7750f98346c0784e8b.setIcon(div_icon_961d900556f7dc21d42df4ec0b030682);
+        
+    
+            var marker_de5a28bb7fa60e46e24a291ec45b4b41 = L.marker(
+                [59.3287901, 18.045308],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_dffe8ef501770955c1d8ded3a907c356 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_de5a28bb7fa60e46e24a291ec45b4b41.setIcon(icon_dffe8ef501770955c1d8ded3a907c356);
+        
+    
+            marker_de5a28bb7fa60e46e24a291ec45b4b41.bindTooltip(
+                `<div>
+                     13:00 - Lunch at Meno Male<br>Cost: 150 SEK (~ 13.64 EUR)<br>Transport: Walk or T-Bana (Blue line) to Rådhuset station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_9f200ffdd60fb52259934ae167c04417 = L.marker(
+                [59.331407, 18.0454513],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_23e5508b7e97f1f98171ca27b7fea52a = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid blue;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSunday, Feb 16\u003c/b\u003e\u003cbr\u003e\n                      16:30\u003cbr\u003e\n                      Pick up luggage (Clarion Amaranten)\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_9f200ffdd60fb52259934ae167c04417.setIcon(div_icon_23e5508b7e97f1f98171ca27b7fea52a);
+        
+    
+            var marker_d7a99e125982f7e6a1520059bbd37622 = L.marker(
+                [59.331407, 18.0454513],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_d2635af30ea34e71db84227b0b3b1294 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d7a99e125982f7e6a1520059bbd37622.setIcon(icon_d2635af30ea34e71db84227b0b3b1294);
+        
+    
+            marker_d7a99e125982f7e6a1520059bbd37622.bindTooltip(
+                `<div>
+                     16:30 - Pick up luggage (Clarion Amaranten)<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: Walk or T-Bana (Blue line) to Rådhuset station
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_96a22069f317278bad2fd10c33511214 = L.marker(
+                [59.3333745, 18.0551536],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_c33644bfc6e99d69148e8f0c05a947a0 = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid blue;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSunday, Feb 16\u003c/b\u003e\u003cbr\u003e\n                      17:00\u003cbr\u003e\n                      Arlanda Express to Airport\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_96a22069f317278bad2fd10c33511214.setIcon(div_icon_c33644bfc6e99d69148e8f0c05a947a0);
+        
+    
+            var marker_c71de4855693915dd03303045dc18ccb = L.marker(
+                [59.3333745, 18.0551536],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_87413fe38969fb1e0960416729cd935e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_c71de4855693915dd03303045dc18ccb.setIcon(icon_87413fe38969fb1e0960416729cd935e);
+        
+    
+            marker_c71de4855693915dd03303045dc18ccb.bindTooltip(
+                `<div>
+                     17:00 - Arlanda Express to Airport<br>Cost: 299 SEK (~ 27.18 EUR)<br>Transport: Flygbussarna or Arlanda Express from T-Centralen
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d43a0ad927c70f6c439f7212d01f3762 = L.marker(
+                [59.646872099999996, 17.937124334194475],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var div_icon_12e85feb160781e14bf239c373e9ca8e = L.divIcon({
+  "html": "\n                    \u003cdiv style=\"font-size:12px;\n                                font-weight:bold;\n                                background-color:#ffffff;\n                                border:2px solid blue;\n                                color:black;\n                                padding:3px;\"\u003e\n                      \u003cb\u003eSunday, Feb 16\u003c/b\u003e\u003cbr\u003e\n                      18:00\u003cbr\u003e\n                      Arrive Arlanda Airport for departure\n                    \u003c/div\u003e\n                    ",
+  "iconSize": [150, 36],
+  "iconAnchor": [0, 0],
+  "className": "empty",
+});
+            marker_d43a0ad927c70f6c439f7212d01f3762.setIcon(div_icon_12e85feb160781e14bf239c373e9ca8e);
+        
+    
+            var marker_43a3f8c5b7380499dfadb87ccdb9f419 = L.marker(
+                [59.646872099999996, 17.937124334194475],
+                {
+}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            var icon_87092303e585eb32d00216e950f185e3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_43a3f8c5b7380499dfadb87ccdb9f419.setIcon(icon_87092303e585eb32d00216e950f185e3);
+        
+    
+            marker_43a3f8c5b7380499dfadb87ccdb9f419.bindTooltip(
+                `<div>
+                     18:00 - Arrive Arlanda Airport for departure<br>Cost: 0 SEK (~ 0.00 EUR)<br>Transport: Flygbussarna or Arlanda Express from T-Centralen
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_73f27a92111ad8806d913b104eb01666 = L.polyline(
+                [[59.3207312389999, 18.06045556823467], [59.34019565307254, 18.055154799972097], [59.3287901, 18.045308], [59.331407, 18.0454513], [59.3333745, 18.0551536], [59.646872099999996, 17.937124334194475]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(map_0deb4275ad61fea670480d10eb0ac980);
+        
+    
+            poly_line_73f27a92111ad8806d913b104eb01666.bindTooltip(
+                `<div>
+                     Sunday, Feb 16
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
